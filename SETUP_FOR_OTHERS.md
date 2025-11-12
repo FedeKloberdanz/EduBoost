@@ -77,7 +77,7 @@ docker logs -f eduboost_leaderboard_consumer
 When you complete a task, all 3 should show activity! 🎉
 
 ### Check Kafka UI:
-Open browser: http://localhost:8080
+Open browser: http://localhost:8090
 - Go to Topics → `eduboost.task.completed`
 - See your events!
 
@@ -150,7 +150,7 @@ Then check the consumer logs - all 3 should process it!
 - **3001**: Event Producer API (Kafka)
 - **5432**: PostgreSQL database
 - **5050**: pgAdmin (optional, for DB management)
-- **8080**: Kafka UI
+- **8090**: Kafka UI
 - **9092**: Kafka broker (internal)
 - **9093**: Kafka broker (external)
 - **2181**: Zookeeper

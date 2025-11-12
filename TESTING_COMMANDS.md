@@ -68,7 +68,7 @@ docker logs -f eduboost_leaderboard_consumer
 
 ## View Events in Kafka UI
 
-1. Open: http://localhost:8080
+1. Open: http://localhost:8090
 2. Click **Topics**
 3. Click **eduboost.task.completed**
 4. Click **Messages** tab

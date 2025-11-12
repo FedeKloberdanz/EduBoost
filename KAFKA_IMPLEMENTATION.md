@@ -95,10 +95,10 @@ GET  http://localhost:3001/health
 - Periodic leaderboard refresh
 - Console display with medals 🥇🥈🥉
 
-### 5. **Kafka UI** (Port 8080)
+### 5. **Kafka UI** (Port 8090)
 - Web interface to monitor Kafka
 - View topics, messages, consumer groups
-- Access: http://localhost:8080
+- Access: http://localhost:8090
 
 ---
 
@@ -133,7 +133,7 @@ You should see 10 containers running.
 
 ### 3. Access Kafka UI:
 
-Open http://localhost:8080 to see:
+Open http://localhost:8090 to see:
 - Topics and their messages
 - Consumer groups and lag
 - Broker configuration
@@ -144,7 +144,7 @@ Open http://localhost:8080 to see:
 
 ### Test 1: Complete a Task (End-to-End)
 
-1. **Open Kafka UI**: http://localhost:8080
+1. **Open Kafka UI**: http://localhost:8090
 2. **Navigate to Topics** → Click on `eduboost.task.completed`
 3. **In another terminal**, watch consumer logs:
    ```bash
@@ -226,7 +226,7 @@ curl http://localhost:3001/stats
 
 ### View Kafka UI
 ```
-http://localhost:8080
+http://localhost:8090
 ```
 
 ### Check Event Producer logs

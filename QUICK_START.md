@@ -19,7 +19,7 @@ docker-compose up -d --build
 - PostgreSQL + PostgREST
 - Event Producer (port 3001)
 - 3 Consumer services
-- Kafka UI (port 8080)
+- Kafka UI (Port 8090)
 - PgAdmin (port 5050)
 
 ---
@@ -48,7 +48,7 @@ You should see **10 containers** running:
 
 ### Kafka UI (Essential!)
 ```
-http://localhost:8080
+http://localhost:8090
 ```
 - View topics
 - See messages in real-time
@@ -109,7 +109,7 @@ docker logs -f eduboost_leaderboard_consumer
 
 ### Test 3: View in Kafka UI
 
-1. Open http://localhost:8080
+1. Open http://localhost:8090
 2. Click **Topics**
 3. Click `eduboost.task.completed`
 4. Click **Messages**
@@ -123,7 +123,7 @@ docker logs -f eduboost_leaderboard_consumer
 
 1. **Architecture** - Show KAFKA_IMPLEMENTATION.md diagram
 2. **Running Services** - `docker-compose ps`
-3. **Kafka UI** - Open http://localhost:8080
+3. **Kafka UI** - Open http://localhost:8090
 4. **Open Consumer Logs** - 3 terminals with `docker logs -f`
 5. **Mobile App** - Complete a task
 6. **Watch Magic Happen**:

@@ -290,7 +290,7 @@ Apache Kafka es una plataforma de streaming distribuida que actúa como "sistema
 **Servicios desplegados**:
 1. **zookeeper**: Coordinación Kafka
 2. **kafka**: Message broker
-3. **kafka-ui**: Interfaz de monitoreo (puerto 8080)
+3. **kafka-ui**: Interfaz de monitoreo (puerto 8090)
 4. **db**: PostgreSQL
 5. **postgrest**: API REST sobre PostgreSQL
 6. **pgadmin**: Gestión de base de datos
@@ -335,7 +335,7 @@ docker compose up
 ```
 
 **Acceder a interfaces**:
-- Kafka UI: http://localhost:8080
+- Kafka UI: http://localhost:8090
 - pgAdmin: http://localhost:5050
 - PostgREST API: http://localhost:3000
 - Event Producer API: http://localhost:3001
@@ -410,7 +410,7 @@ npm start    # Levanta Expo con auto-detección de IP
    🥉 3. student3@example.com - 80 points (Level 1)
 ```
 
-**Kafka UI (localhost:8080)**:
+**Kafka UI (localhost:8090)**:
 - Topic `eduboost.task.completed` muestra mensaje JSON
 - Partition 0, Offset incrementado
 - Consumer groups activos: notification-group, analytics-group, leaderboard-group

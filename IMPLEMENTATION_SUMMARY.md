@@ -6,14 +6,14 @@
 - ✅ **Kafka Broker** running with Zookeeper
 - ✅ **Event Producer Service** (publishes events to Kafka)
 - ✅ **3 Consumer Services** (process events independently)
-- ✅ **Kafka UI** for monitoring (http://localhost:8080)
+- ✅ **Kafka UI** for monitoring (http://localhost:8090)
 - ✅ **Original PostgreSQL + PostgREST + Mobile App**
 
 ### All Services Running (10 containers):
 ```
 ✅ eduboost_zookeeper           - Kafka coordination
 ✅ eduboost_kafka               - Message broker
-✅ eduboost_kafka_ui            - Monitoring web UI (port 8080)
+✅ eduboost_kafka_ui            - Monitoring web UI (Port 8090)
 ✅ eduboost_db                  - PostgreSQL database
 ✅ eduboost_postgrest           - REST API (port 3000)
 ✅ eduboost_pgadmin             - Database admin (port 5050)
@@ -29,7 +29,7 @@
 
 ### 1. Open Kafka UI
 ```
-http://localhost:8080
+http://localhost:8090
 ```
 Navigate to **Topics** → you should see 5 topics created.
 
@@ -58,7 +58,7 @@ docker logs -f eduboost_leaderboard_consumer
 Run the curl command again and watch ALL 3 terminals light up! 🎊
 
 ### 5. Check Kafka UI
-- Go to http://localhost:8080
+- Go to http://localhost:8090
 - Click **Topics** → **eduboost.task.completed**
 - Click **Messages** tab
 - See your events!
@@ -94,7 +94,7 @@ docker-compose ps
 Explain each service's purpose.
 
 ### Step 3: Kafka UI Tour (3 min)
-- Open http://localhost:8080
+- Open http://localhost:8090
 - Show Topics (5 topics)
 - Show Consumers (3 consumer groups)
 - Show Brokers
@@ -242,7 +242,7 @@ docker-compose up -d --build
 ## ✅ Checklist
 
 - [ ] All 10 containers running
-- [ ] Kafka UI accessible (http://localhost:8080)
+- [ ] Kafka UI accessible (http://localhost:8090)
 - [ ] Event Producer working (test with curl)
 - [ ] All 3 consumers listening
 - [ ] Mobile app still works
