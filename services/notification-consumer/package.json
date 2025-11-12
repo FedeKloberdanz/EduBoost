@@ -1,0 +1,12 @@
+{
+  "name": "eduboost-notification-consumer",
+  "version": "1.0.0",
+  "description": "Notification Consumer - Processes events and sends notifications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
+}

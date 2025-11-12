@@ -1,0 +1,13 @@
+{
+  "name": "eduboost-leaderboard-consumer",
+  "version": "1.0.0",
+  "description": "Leaderboard Consumer - Updates rankings in real-time",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "pg": "^8.11.3"
+  }
+}

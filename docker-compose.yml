@@ -1,0 +1,159 @@
+services:
+  # Zookeeper (required by Kafka)
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: eduboost_zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - eduboost_network
+
+  # Kafka Broker
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: eduboost_kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - eduboost_network
+
+  # Kafka UI for monitoring
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: eduboost_kafka_ui
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: eduboost
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    networks:
+      - eduboost_network
+
+  db:
+    image: postgres:15
+    container_name: eduboost_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eduboost
+    volumes:
+      - ./supabase/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eduboost_network
+
+  postgrest:
+    image: postgrest/postgrest:v12.0.2
+    container_name: eduboost_postgrest
+    restart: always
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@db:5432/eduboost
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: postgres
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://localhost:3000
+      PGRST_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - eduboost_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: eduboost_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@eduboost.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - eduboost_network
+
+  # Event Producer Service (publishes events to Kafka)
+  event-producer:
+    build: ./services/event-producer
+    container_name: eduboost_event_producer
+    restart: always
+    environment:
+      KAFKA_BROKER: kafka:9092
+      DATABASE_URL: postgres://postgres:postgres@db:5432/eduboost
+    ports:
+      - "3001:3001"
+    depends_on:
+      - kafka
+      - db
+    networks:
+      - eduboost_network
+
+  # Notification Consumer Service
+  notification-consumer:
+    build: ./services/notification-consumer
+    container_name: eduboost_notification_consumer
+    restart: always
+    environment:
+      KAFKA_BROKER: kafka:9092
+    depends_on:
+      - kafka
+    networks:
+      - eduboost_network
+
+  # Analytics Consumer Service
+  analytics-consumer:
+    build: ./services/analytics-consumer
+    container_name: eduboost_analytics_consumer
+    restart: always
+    environment:
+      KAFKA_BROKER: kafka:9092
+      DATABASE_URL: postgres://postgres:postgres@db:5432/eduboost
+    depends_on:
+      - kafka
+      - db
+    networks:
+      - eduboost_network
+
+  # Leaderboard Consumer Service
+  leaderboard-consumer:
+    build: ./services/leaderboard-consumer
+    container_name: eduboost_leaderboard_consumer
+    restart: always
+    environment:
+      KAFKA_BROKER: kafka:9092
+      DATABASE_URL: postgres://postgres:postgres@db:5432/eduboost
+    depends_on:
+      - kafka
+      - db
+    networks:
+      - eduboost_network
+
+networks:
+  eduboost_network:
+    driver: bridge

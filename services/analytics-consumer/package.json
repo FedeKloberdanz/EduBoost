@@ -1,0 +1,13 @@
+{
+  "name": "eduboost-analytics-consumer",
+  "version": "1.0.0",
+  "description": "Analytics Consumer - Tracks and analyzes user events",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "pg": "^8.11.3"
+  }
+}
