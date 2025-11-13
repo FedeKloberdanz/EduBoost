@@ -40,8 +40,8 @@ async function processEvent(topic, event) {
     case 'task_completed':
       await sendNotification(
         event.userId,
-        '🎉 ¡Tarea Completada!',
-        `Has completado "${event.taskTitle}" y ganado ${event.points} puntos`,
+        '🎉 Task Completed!',
+        `You completed "${event.taskTitle}" and earned ${event.points} points`,
         'success'
       );
       break;
@@ -49,8 +49,8 @@ async function processEvent(topic, event) {
     case 'task_uncompleted':
       await sendNotification(
         event.userId,
-        '↩️ Tarea Desmarcada',
-        `Has desmarcado "${event.taskTitle}" y perdido ${event.points} puntos`,
+        '↩️ Task Unchecked',
+        `You unchecked "${event.taskTitle}" and lost ${event.points} points`,
         'info'
       );
       break;
@@ -58,8 +58,8 @@ async function processEvent(topic, event) {
     case 'achievement_unlocked':
       await sendNotification(
         event.userId,
-        '🏆 ¡Logro Desbloqueado!',
-        `Has desbloqueado: ${event.achievementName} (+${event.points} puntos)`,
+        '🏆 Achievement Unlocked!',
+        `You unlocked: ${event.achievementName} (+${event.points} points)`,
         'achievement'
       );
       break;
@@ -67,8 +67,8 @@ async function processEvent(topic, event) {
     case 'level_up':
       await sendNotification(
         event.userId,
-        '🚀 ¡Subiste de Nivel!',
-        `¡Felicidades! Ahora estás en el nivel ${event.newLevel}`,
+        '🚀 Level Up!',
+        `Congratulations! You are now level ${event.newLevel}`,
         'celebration'
       );
       break;
@@ -76,8 +76,8 @@ async function processEvent(topic, event) {
     case 'user_login':
       await sendNotification(
         event.userId,
-        '👋 Bienvenido de vuelta',
-        `Último acceso: ${event.timestamp}`,
+        '👋 Welcome back',
+        `Last access: ${event.timestamp}`,
         'info'
       );
       break;

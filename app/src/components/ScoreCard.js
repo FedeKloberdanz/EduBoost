@@ -8,19 +8,19 @@ export default function ScoreCard({ score }) {
     <View style={styles.container}>
       <View style={styles.statBox}>
         <Text style={styles.statValue}>{score.total_points || 0}</Text>
-        <Text style={styles.statLabel}>Puntos</Text>
+        <Text style={styles.statLabel}>Points</Text>
       </View>
       <View style={styles.statBox}>
-        <Text style={styles.statValue}>Nivel {score.current_level || 1}</Text>
-        <Text style={styles.statLabel}>Nivel</Text>
+        <Text style={styles.statValue}>Level {score.current_level || 1}</Text>
+        <Text style={styles.statLabel}>Level</Text>
       </View>
       <View style={styles.statBox}>
         <Text style={styles.statValue}>{score.tasks_completed || 0}</Text>
-        <Text style={styles.statLabel}>Tareas</Text>
+        <Text style={styles.statLabel}>Tasks</Text>
       </View>
       <View style={styles.statBox}>
         <Text style={styles.statValue}>{score.current_streak || 0}🔥</Text>
-        <Text style={styles.statLabel}>Racha</Text>
+        <Text style={styles.statLabel}>Streak</Text>
       </View>
     </View>
   );

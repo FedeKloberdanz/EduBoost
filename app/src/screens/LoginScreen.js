@@ -72,10 +72,10 @@ export default function LoginScreen({ navigation }) {
       {loading ? (
         <ActivityIndicator size="large" color="#007AFF" />
       ) : (
-        <Button title="Iniciar Sesión" onPress={handleLogin} />
+        <Button title="Login" onPress={handleLogin} />
       )}
       <Text style={styles.hint}>
-        Usuario de prueba: test@example.com / 1234
+        Test user: test@example.com / 1234
       </Text>
     </View>
   );

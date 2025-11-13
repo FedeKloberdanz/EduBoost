@@ -37,7 +37,7 @@ export default function LessonScreen({ route, navigation }) {
 
   const handleSubmit = () => {
     if (!selectedAnswer) {
-      Alert.alert('Selecciona una respuesta', 'Por favor elige una opción antes de continuar.');
+      Alert.alert('Select an answer', 'Please choose an option before continuing.');
       return;
     }
 
@@ -104,7 +104,7 @@ export default function LessonScreen({ route, navigation }) {
         >
           <Text style={styles.closeButtonText}>✕</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Lección</Text>
+        <Text style={styles.headerTitle}>Lesson</Text>
         <View style={styles.headerSpacer} />
       </View>
 
@@ -154,7 +154,7 @@ export default function LessonScreen({ route, navigation }) {
         {showResult && (
           <View style={[styles.resultContainer, isCorrect ? styles.resultCorrect : styles.resultWrong]}>
             <Text style={styles.resultTitle}>
-              {isCorrect ? '¡Correcto! 🎉' : '¡Incorrecto! 😕'}
+              {isCorrect ? 'Correct! 🎉' : 'Incorrect! 😕'}
             </Text>
             <Text style={styles.resultExplanation}>{lesson.explanation}</Text>
           </View>
@@ -172,12 +172,12 @@ export default function LessonScreen({ route, navigation }) {
             {isSubmitting ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.submitButtonText}>VERIFICAR</Text>
+              <Text style={styles.submitButtonText}>CHECK</Text>
             )}
           </TouchableOpacity>
         ) : isCorrect ? (
           <View style={styles.successMessage}>
-            <Text style={styles.successText}>Continuando...</Text>
+            <Text style={styles.successText}>Continuing...</Text>
             <ActivityIndicator color="#58cc02" size="small" />
           </View>
         ) : (
@@ -186,13 +186,13 @@ export default function LessonScreen({ route, navigation }) {
               style={styles.retryButton}
               onPress={handleRetry}
             >
-              <Text style={styles.retryButtonText}>INTENTAR DE NUEVO</Text>
+              <Text style={styles.retryButtonText}>TRY AGAIN</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.skipButton}
               onPress={() => navigation.goBack()}
             >
-              <Text style={styles.skipButtonText}>SALIR</Text>
+              <Text style={styles.skipButtonText}>QUIT</Text>
             </TouchableOpacity>
           </View>
         )}

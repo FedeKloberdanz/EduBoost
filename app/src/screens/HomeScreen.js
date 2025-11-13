@@ -53,8 +53,8 @@ export default function HomeScreen({ route, navigation }) {
       setTasks(data || []);
     } catch (err) {
       console.error("Error fetching tasks:", err);
-      setError("No se pudieron cargar las tareas. Verifica la conexión.");
-      Alert.alert("Error", "No se pudieron cargar las tareas");
+      setError("Could not load tasks. Please check your connection.");
+      Alert.alert("Error", "Could not load tasks");
     }
   };
 
@@ -158,7 +158,7 @@ export default function HomeScreen({ route, navigation }) {
       // Check if user exists
       if (!user || !user.id) {
         console.error('❌ Cannot uncomplete task: user is undefined');
-        Alert.alert("Error", "No se pudo identificar el usuario");
+        Alert.alert("Error", "Could not identify user");
         return;
       }
       
@@ -216,7 +216,7 @@ export default function HomeScreen({ route, navigation }) {
       }, 500);
     } catch (err) {
       console.error("Error updating task:", err);
-      Alert.alert("Error", "No se pudo actualizar la tarea");
+      Alert.alert("Error", "Could not update task");
     }
   };
 
@@ -228,7 +228,7 @@ export default function HomeScreen({ route, navigation }) {
       // Check if user exists
       if (!user || !user.id) {
         console.error('❌ Cannot complete task: user is undefined');
-        Alert.alert("Error", "No se pudo identificar el usuario");
+        Alert.alert("Error", "Could not identify user");
         return;
       }
       
@@ -286,7 +286,7 @@ export default function HomeScreen({ route, navigation }) {
       }, 500);
     } catch (err) {
       console.error("Error completing task:", err);
-      Alert.alert("Error", "No se pudo completar la tarea");
+      Alert.alert("Error", "Could not complete task");
     }
   };
 
@@ -351,7 +351,7 @@ export default function HomeScreen({ route, navigation }) {
       <SafeAreaView style={styles.container}>
         <View style={styles.centerContainer}>
           <ActivityIndicator size="large" color="#007AFF" />
-          <Text style={styles.loadingText}>Cargando tareas...</Text>
+          <Text style={styles.loadingText}>Loading tasks...</Text>
         </View>
       </SafeAreaView>
     );
@@ -373,13 +373,13 @@ export default function HomeScreen({ route, navigation }) {
 
       {showNotifications ? (
         <View style={styles.notificationsContainer}>
-          <Text style={styles.sectionTitle}>Notificaciones</Text>
+          <Text style={styles.sectionTitle}>Notifications</Text>
           <NotificationList
             notifications={notifications}
             onMarkAsRead={markNotificationAsRead}
           />
           <Button
-            title="Volver a Tareas"
+            title="Back to Tasks"
             onPress={() => setShowNotifications(false)}
           />
         </View>
@@ -408,11 +408,11 @@ export default function HomeScreen({ route, navigation }) {
             </View>
           )}
 
-          <Text style={styles.sectionTitle}>Mis Tareas</Text>
+          <Text style={styles.sectionTitle}>My Tasks</Text>
 
           {tasks.length === 0 ? (
             <View style={styles.emptyContainer}>
-              <Text style={styles.emptyText}>No hay tareas disponibles</Text>
+              <Text style={styles.emptyText}>No tasks available</Text>
             </View>
           ) : (
             <FlatList
@@ -428,7 +428,7 @@ export default function HomeScreen({ route, navigation }) {
             />
           )}
 
-          <Button title="Actualizar" onPress={onRefresh} />
+          <Button title="Refresh" onPress={onRefresh} />
         </>
       )}
     </SafeAreaView>

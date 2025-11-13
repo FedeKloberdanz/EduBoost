@@ -291,26 +291,26 @@ VALUES ('test@example.com', '1234', 'Usuario Demo');
 INSERT INTO tasks (user_id, title, done)
 VALUES (
   (SELECT id FROM users WHERE email = 'test@example.com'),
-  'Completar primer módulo de EduBoost',
+  'Complete first EduBoost module',
   false
 ),
 (
   (SELECT id FROM users WHERE email = 'test@example.com'),
-  'Ver video de introducción',
+  'Watch introduction video',
   false
 ),
 (
   (SELECT id FROM users WHERE email = 'test@example.com'),
-  'Realizar quiz de conocimientos',
+  'Take knowledge quiz',
   false
 );
 
--- Insertar logros predefinidos
+-- Insert predefined achievements
 INSERT INTO achievements (name, description, icon, points, criteria) VALUES
-  ('first_task', 'Primera tarea completada', '🎯', 50, '{"tasks_completed": 1}'::jsonb),
-  ('task_master', 'Completa 10 tareas', '⭐', 100, '{"tasks_completed": 10}'::jsonb),
-  ('level_5', 'Alcanza el nivel 5', '🚀', 150, '{"level": 5}'::jsonb),
-  ('streak_7', 'Racha de 7 días', '🔥', 200, '{"streak": 7}'::jsonb);
+  ('first_task', 'First task completed', '🎯', 50, '{"tasks_completed": 1}'::jsonb),
+  ('task_master', 'Complete 10 tasks', '⭐', 100, '{"tasks_completed": 10}'::jsonb),
+  ('level_5', 'Reach level 5', '🚀', 150, '{"level": 5}'::jsonb),
+  ('streak_7', '7 day streak', '🔥', 200, '{"streak": 7}'::jsonb);
 
 -- Crear algunas notificaciones de bienvenida
 INSERT INTO notifications (user_id, title, message, type)
