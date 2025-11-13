@@ -9,6 +9,7 @@ import {
   Alert,
   RefreshControl,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { supabase } from "../api/supabase";
 import { API_CONFIG } from "../../config";
@@ -347,24 +348,26 @@ export default function HomeScreen({ route, navigation }) {
 
   if (loading) {
     return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
-        <Text style={styles.loadingText}>Cargando tareas...</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" color="#007AFF" />
+          <Text style={styles.loadingText}>Cargando tareas...</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>
           EduBoost {user?.username && `- ${user.username}`}
         </Text>
         <Button
           title={`🔔 ${unreadCount > 0 ? `(${unreadCount})` : ""}`}
-          onPress={() => setShowNotifications(!showNotifications)}
+          onPress={() => navigation.navigate('Notifications', { user })}
         />
       </View>
 
@@ -383,6 +386,21 @@ export default function HomeScreen({ route, navigation }) {
       ) : (
         <>
           <ScoreCard score={score} />
+
+          {/* Navigation to new screens */}
+          <View style={styles.quickActions}>
+            <Button
+              title="🏆 Leaderboard"
+              onPress={() => navigation.navigate('Leaderboard')}
+              color="#FF9500"
+            />
+            <View style={styles.buttonSpacer} />
+            <Button
+              title="📊 Analytics"
+              onPress={() => navigation.navigate('Analytics', { user })}
+              color="#34C759"
+            />
+          </View>
 
           {error && (
             <View style={styles.errorContainer}>
@@ -406,13 +424,14 @@ export default function HomeScreen({ route, navigation }) {
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }
+              contentContainerStyle={styles.listContent}
             />
           )}
 
           <Button title="Actualizar" onPress={onRefresh} />
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -458,5 +477,15 @@ const styles = StyleSheet.create({
   emptyText: { color: "#999", fontSize: 16 },
   notificationsContainer: {
     flex: 1,
+  },
+  quickActions: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  buttonSpacer: {
+    width: 10,
+  },
+  listContent: {
+    paddingBottom: 20,
   },
 });
